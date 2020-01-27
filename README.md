@@ -12,9 +12,9 @@ Modifications include updating the Customer_Churn_Analysis.ipynb Jupyter noteboo
 
      - DC/OS Data Science Engine enables rapid on-boarding
 
-     - DC/OS Data Science Engine's Secure collaboration increases experiment velocity
+     - DC/OS Data Science Engine's secure collaboration increases experiment velocity
 
-     - DC/OS Data Science Engine's Elastic resource pooling accelerates model training
+     - DC/OS Data Science Engine's elastic resource pooling accelerates model training
 
      - DC/OS Data Science Engine scales and accelerates data science at much lower cost
 
