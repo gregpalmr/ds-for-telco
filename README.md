@@ -1,6 +1,6 @@
 # ds-for-telco
 
-This repo is a sample Jupyter Lab notebook with supporting data, modified from the http://github.com/gregoryg/ds-for-telco repo.
+This repo is a sample Jupyter Lab notebook with supporting data that helps demonstrate D2iQ's DC/OS Data Science Engine. It is a modified version of the http://github.com/gregoryg/ds-for-telco repo.
 
 Modifications include updating the Customer_Churn_Analysis.ipynb Jupyter notebook to use the default HDFS configuration from a DC/OS Mesos based HDFS service and to use a "data_lake" prefix in the HDFS file paths.
 
