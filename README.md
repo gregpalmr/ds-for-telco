@@ -6,7 +6,7 @@ Modifications include updating the Customer_Churn_Analysis.ipynb Jupyter noteboo
 
 ## I. DEMO SCRIPT - DC/OS Data Science Engine (DSE) 
 
-1. Present a few slides on D2iQ's DC/OS Data Science Engine and the value proposition:
+1. Present a few slides on D2iQ's DC/OS Data Science Engine with the value propositions:
 
      - DC/OS Data Science Engine accelerates ML with dramatically lower costs
 
@@ -20,7 +20,7 @@ Modifications include updating the Customer_Churn_Analysis.ipynb Jupyter noteboo
 
      - DC/OS Data Science Engine accelerates and simplifies Machine Learning workflow
 
-2. Present an overview of Mesosphere DC/OS for data analytics workloads and describe the following:
+2. Present an overview of Mesosphere DC/OS for data analytics workloads and show/describe the following:
 
      - DC/OS Cluster Management - Nodes, Resources, On-prem, Cloud & Regions, AZs
      - Jupyter Lab
@@ -45,11 +45,11 @@ Modifications include updating the Customer_Churn_Analysis.ipynb Jupyter noteboo
      - DC/OS Secret support
      - Deployment Plans
 
-4. Show how Mesosphere Data Science Engine (DSE) can be setup for multiple teams and team members
+4. Show how Mesosphere Data Science Engine (DSE) can be setup for multiple teams and team members. Show and discuss the following:
 
-     - Enable HDFS (data lake) integration
+     - HDFS (data lake) integration
    Use default endpoint: http://api.hdfs.marathon.l4lb.thisdcos.directory/v1/endpoints
-     - Enable GPU support
+     - GPU support
      - Inbound Load Balancer support and Admin Router support
      - TLS support
      - Kerberos support
@@ -57,6 +57,7 @@ Modifications include updating the Customer_Churn_Analysis.ipynb Jupyter noteboo
      - User authentication with OpenID Connect
      - Distrubuted Spark support
      - Multiple groups and users
+
           /team1/dev/data-science-engine
           /team1/test/data-science-engine
           /team1/prod/data-science-engine
