@@ -153,12 +153,13 @@ Step 4. Create some non-admin users and groups with limited access permissions.
 /service/team1/dev/data-science-engine/lab
 
 
-Step 5. Create a demo file-based secret holding a fake kerberos keytab file
+Step 5. Create a demo file-based secrets holding a fake kerberos keytab file contents
 
-     $ echo "KEYTAB FILE CONTENTS " >  kerberos.keytab
+     $ echo "KEYTAB TEAM1 DEV FILE CONTENTS " >  kerberos-team1-dev.keytab
+     $ dcos security secrets create --file kerberos-team1-dev.keytab /team1/dev/kerberos_keytab
 
-     $ dcos security secrets create --file kerberos.keytab /team1/dev/kerberos_keytab
-
+     $ echo "KEYTAB TEAM1 TEST FILE CONTENTS " >  kerberos-team1-test.keytab
+     $ dcos security secrets create --file kerberos-team1-test.keytab /team1/test/kerberos_keytab
 
 <b>Related Content</b>:<br>
 
