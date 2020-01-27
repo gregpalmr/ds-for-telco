@@ -4,6 +4,161 @@ This repo is a sample Jupyter Lab notebook with supporting data, modified from t
 
 Modifications include updating the Customer_Churn_Analysis.ipynb Jupyter notebook to use the default HDFS configuration from a DC/OS Mesos based HDFS service and to use a "data_lake" prefix in the HDFS file paths.
 
+## I. DC/OS Data Science Engine (DSE) Demo script
+
+1. Present a few slides on D2iQ's DC/OS Data Science Engine and the value proposition:
+
+     - DC/OS Data Science Engine accelerates ML with dramatically lower costs
+
+     - DC/OS Data Science Engine enables rapid on-boarding
+
+     - DC/OS Data Science Engine's Secure collaboration increases experiment velocity
+
+     - DC/OS Data Science Engine's Elastic resource pooling accelerates model training
+
+     - DC/OS Data Science Engine scales and accelerates data science at much lower cost
+
+     - DC/OS Data Science Engine accelerates and simplifies Machine Learning workflow
+
+2. Present an overview of Mesosphere DC/OS for data analytics workloads and describe the following:
+
+     - DC/OS Cluster Management - Nodes, Resources, On-prem, Cloud & Regions, AZs
+     - Jupyter Lab
+     - Spark
+     - TensorFlow
+     - GPU support
+     - Hive Metastore
+     - Zeppelin Notebook
+     - Apache HDFS
+     - Apache Kafka
+     - Apache Flink - stream processing
+     - Apache NiFi - data flows
+     - Apache Storm
+     - Elastic
+
+3. Show how easy it is to install a highly available HDFS service in DC/OS and discuss the following:
+
+     - Persistant storage support
+     - Kerberos integration
+     - HA enabled
+     - TLS enabled
+     - DC/OS Secret support
+     - Deployment Plans
+
+4. Show how Mesosphere Data Science Engine (DSE) can be setup for multiple teams and team members
+
+     - Enable HDFS (data lake) integration
+	Use default endpoint: http://api.hdfs.marathon.l4lb.thisdcos.directory/v1/endpoints
+     - Enable GPU support
+     - Inbound Load Balancer support and Admin Router support
+     - TLS support
+     - Kerberos support
+     - Persistent storage support
+     - User authentication with OpenID Connect
+     - Distrubuted Spark support
+     - Multiple groups and users
+          /team1/dev/data-science-engine
+          /team1/test/data-science-engine
+          /team1/prod/data-science-engine
+          /team2/dev/data-science-engine
+
+5. Show the ds-for-telco Jupyter lab/Spark notebook
+
+     Follow the script for the original ds-for-telco Jupyter lab & spark demo
+
+6. Summarize what was demo'd and link it to the previously presented value propositions:
+
+     - DC/OS Data Science Engine accelerates ML with dramatically lower costs
+
+     - DC/OS Data Science Engine enables rapid on-boarding
+
+     - DC/OS Data Science Engine's secure collaboration increases experiment velocity
+
+     - DC/OS Data Science Engine's elastic resource pooling accelerates model training
+
+     - DC/OS Data Science Engine scales and accelerates data science at much lower cost
+
+     - DC/OS Data Science Engine accelerates and simplifies Machine Learning workflow
+
+
+
+## II. DEMO SETUP
+
+Step 1. Launch a DC/OS 2.x cluster
+     - 1 public agents
+     - 10 private agents
+     - 1 or 3 master nodes
+     - Use the DC/OS Terraform templates or the advanced installer
+
+
+Step 2. Install DC/OS CLI (latest)
+
+     - Follow the instructions in the pull down menu option:
+         Install CLI
+
+Step 3. Install various CLI extensions. Run the commantd:
+
+     $ dcos package install --cli data-science-engine --yes
+
+     $ dcos package install --cli hdfs --yes
+
+     $ dcos package install --cli spark --yes
+
+
+Step 4. Create some non-admin users and groups with limited access permissions.
+
+     - Use the DC/OS Dashboard UI or use the following CLI commands:
+
+     Group: team1
+
+     $ dcos security org groups create team1
+
+     $ dcos security org users create --password changeme ringo
+
+     $ dcos security org groups add_user team1 ringo
+
+     $ dcos security org users create --password changeme john
+
+     $ dcos security org groups add_user team1 john
+
+     Add some privileges to the group
+
+     $ dcos security org groups grant team1 dcos:adminrouter:service:marathon full
+     $ dcos security org groups grant team1 dcos:adminrouter:ops:slave full
+     $ dcos security org groups grant team1 dcos:adminrouter:ops:mesos full
+     $ dcos security org groups grant team1 dcos:adminrouter:package full
+     $ dcos security org groups grant team1 dcos:service:marathon:marathon:services:/team1/dev full
+     $ dcos security org groups grant team1 dcos:service:marathon:marathon:services:/team1/test full
+     $ dcos security org groups grant team1 dcos:secrets:default:/team1/dev full
+     $ dcos security org groups grant team1 dcos:secrets:default:/team1/test full
+
+     $ dcos security org groups grant team1 dcos:adminrouter:service:service/team1/dev/data-science-engine/lab full
+
+     Group: team2
+
+     $ dcos security org groups create team2
+
+     $ dcos security org users create --password changeme paul
+
+     $ dcos security org groups add_user team2 paul
+
+     $ dcos security org users create --password changeme george
+
+     $ dcos security org groups add_user team2 george
+
+     Add some privileges to the group
+
+
+
+/service/team1/dev/data-science-engine/lab
+
+
+Step 5. Create a demo file-based secret holding a fake kerberos keytab file
+
+     $ echo "KEYTAB FILE CONTENTS " >  kerberos.keytab
+
+     $ dcos security secrets create --file kerberos.keytab /team1/dev/kerberos_keytab
+
 
 <b>Related Content</b>:<br>
 
