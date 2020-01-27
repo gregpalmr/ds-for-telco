@@ -4,7 +4,7 @@ This repo is a sample Jupyter Lab notebook with supporting data, modified from t
 
 Modifications include updating the Customer_Churn_Analysis.ipynb Jupyter notebook to use the default HDFS configuration from a DC/OS Mesos based HDFS service and to use a "data_lake" prefix in the HDFS file paths.
 
-## I. DC/OS Data Science Engine (DSE) Demo script
+## I. DEMO SCRIPT - DC/OS Data Science Engine (DSE) 
 
 1. Present a few slides on D2iQ's DC/OS Data Science Engine and the value proposition:
 
@@ -48,7 +48,7 @@ Modifications include updating the Customer_Churn_Analysis.ipynb Jupyter noteboo
 4. Show how Mesosphere Data Science Engine (DSE) can be setup for multiple teams and team members
 
      - Enable HDFS (data lake) integration
-	Use default endpoint: http://api.hdfs.marathon.l4lb.thisdcos.directory/v1/endpoints
+	   Use default endpoint: http://api.hdfs.marathon.l4lb.thisdcos.directory/v1/endpoints
      - Enable GPU support
      - Inbound Load Balancer support and Admin Router support
      - TLS support
