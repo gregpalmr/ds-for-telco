@@ -49,7 +49,7 @@ Modifications include updating the Customer_Churn_Analysis.ipynb Jupyter noteboo
 
      - HDFS (data lake) integration
 
-     ```Use default endpoint: http://api.hdfs.marathon.l4lb.thisdcos.directory/v1/endpoints```
+          ```Use default endpoint: http://api.hdfs.marathon.l4lb.thisdcos.directory/v1/endpoints```
 
      - GPU support
      - Inbound Load Balancer support and Admin Router support
