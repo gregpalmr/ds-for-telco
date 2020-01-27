@@ -58,10 +58,10 @@ Modifications include updating the Customer_Churn_Analysis.ipynb Jupyter noteboo
      - Distrubuted Spark support
      - Multiple groups and users
 
-          /team1/dev/data-science-engine
+          ```/team1/dev/data-science-engine
           /team1/test/data-science-engine
           /team1/prod/data-science-engine
-          /team2/dev/data-science-engine
+          /team2/dev/data-science-engine```
 
 5. Show the ds-for-telco Jupyter lab/Spark notebook
 
