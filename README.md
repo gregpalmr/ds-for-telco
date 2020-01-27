@@ -8,5 +8,6 @@ Modifications include updating the Customer_Churn_Analysis.ipynb Jupyter Noteboo
 <b>Related Content</b>:<br>
 
 http://github.com/gregoryg/ds-for-telco
+
 http://blog.cloudera.com/blog/2016/02/how-to-predict-telco-churn-with-apache-spark-mllib/
 
