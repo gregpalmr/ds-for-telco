@@ -46,7 +46,15 @@ Modifications include updating the Customer_Churn_Analysis.ipynb Jupyter noteboo
      - Deployment Plans
 
 4. Show how Mesosphere Data Science Engine (DSE) can easily be setup for multiple teams and team members. Show and discuss the following:
+     
+     - Support for multiple groups and users
 
+          ```
+          /team1/dev/dse-ringo
+          /team1/dev/dse-john
+          /team2/dev/dse-paul
+          /team2/dev/dse-george
+          ```
      - HDFS (data lake) integration
 
           ```Use default endpoint: http://api.hdfs.marathon.l4lb.thisdcos.directory/v1/endpoints```
@@ -58,14 +66,8 @@ Modifications include updating the Customer_Churn_Analysis.ipynb Jupyter noteboo
      - Persistent storage support
      - User authentication with OpenID Connect
      - Distrubuted Spark support
-     - Multiple groups and users
-
-          ```
-          /team1/dev/data-science-engine
-          /team1/test/data-science-engine
-          /team1/prod/data-science-engine
-          /team2/dev/data-science-engine
-          ```
+     - Dynamic downloading of git repos
+          ``` Add "git clone https://github.com/gregpalmr/ds-for-telco && " to begining of CMD```
 
 5. Show the ds-for-telco Jupyter lab/Spark notebook
 
@@ -103,11 +105,11 @@ Step 2. Install DC/OS CLI (latest)
 
 Step 3. Install various CLI extensions. Run the commantd:
 
-     $ dcos package install --cli data-science-engine --yes
+     dcos package install --cli data-science-engine --yes
 
-     $ dcos package install --cli hdfs --yes
+     dcos package install --cli hdfs --yes
 
-     $ dcos package install --cli spark --yes
+     dcos package install --cli spark --yes
 
 
 Step 4. Create some non-admin users and groups with limited access permissions.
@@ -116,17 +118,17 @@ Step 4. Create some non-admin users and groups with limited access permissions.
 
      Group: team1
 
-     dcos security org groups create team1
+          dcos security org groups create team1
 
-     dcos security org users create --password changeme ringo
+          dcos security org users create --password changeme ringo
 
-     dcos security org groups add_user team1 ringo
+          dcos security org groups add_user team1 ringo
 
-     dcos security org users create --password changeme john
+          dcos security org users create --password changeme john
 
-     dcos security org groups add_user team1 john
+          dcos security org groups add_user team1 john
 
-     Add some privileges to the group
+       Add some privileges to the group
 
           dcos security org groups grant team1 dcos:adminrouter:ops:mesos full
 
@@ -134,44 +136,82 @@ Step 4. Create some non-admin users and groups with limited access permissions.
 
           dcos security org groups grant team1 dcos:adminrouter:package full
 
-          dcos security org groups grant team1 dcos:adminrouter:service:team1/ full
-
           dcos security org groups grant team1 dcos:adminrouter:service:marathon full
 
           dcos security org groups grant team1 dcos:secrets:default:/team1 full
 
           dcos security org groups grant team1 dcos:secrets:list:default:/team1 full
 
-          dcos security org groups grant team1 dcos:service:marathon:marathon:services:/team1 full
+       Add some privileges to the users
 
-          dcos security org groups grant team1 dcos:adminrouter:service:service/team1/dev/data-science-engine/lab full
+          dcos security org users grant ringo dcos:adminrouter:service:team1/dev/dse-ringo full
+
+          dcos security org users grant ringo dcos:service:marathon:marathon:services:/team1/dev/dse-ringo full
+
+          dcos security org users grant john dcos:adminrouter:service:team1/dev/dse-john full
+
+          dcos security org users grant john dcos:service:marathon:marathon:services:/team1/dev/dse-john full
+
 
      Group: team2
 
-     $ dcos security org groups create team2
+          dcos security org groups create team2
 
-     $ dcos security org users create --password changeme paul
+          dcos security org users create --password changeme paul
 
-     $ dcos security org groups add_user team2 paul
+          dcos security org groups add_user team2 paul
 
-     $ dcos security org users create --password changeme george
+          dcos security org users create --password changeme george
 
-     $ dcos security org groups add_user team2 george
+          dcos security org groups add_user team2 george
 
-     Add some privileges to the group
+          Also add john to this group (he is in both groups)
 
+          dcos security org groups add_user team2 john
 
+       Add some privileges to the group
 
-/service/team1/dev/data-science-engine/lab
+          dcos security org groups grant team2 dcos:adminrouter:ops:mesos full
+
+          dcos security org groups grant team2 dcos:adminrouter:ops:slave full
+
+          dcos security org groups grant team2 dcos:adminrouter:package full
+
+          dcos security org groups grant team2 dcos:adminrouter:service:marathon full
+
+          dcos security org groups grant team2 dcos:secrets:default:/team2 full
+
+          dcos security org groups grant team2 dcos:secrets:list:default:/team2 full
+
+       Add some privileges to the users
+
+          dcos security org users grant paul dcos:adminrouter:service:team2/dev/dse-paul full
+
+          dcos security org users grant paul dcos:service:marathon:marathon:services:/team2/dev/dse-paul full
+
+          dcos security org users grant george dcos:adminrouter:service:team2/dev/dse-george full
+
+          dcos security org users grant george dcos:service:marathon:marathon:services:/team2/dev/dse-george full
+
+          dcos security org users grant john dcos:adminrouter:service:team2/dev/dse-john full
+
+          dcos security org users grant john dcos:service:marathon:marathon:services:/team2/dev/dse-john full
 
 
 Step 5. Create a demo file-based secrets holding a fake kerberos keytab file contents
 
-     $ echo "KEYTAB TEAM1 DEV FILE CONTENTS " >  kerberos-team1-dev.keytab
-     $ dcos security secrets create --file kerberos-team1-dev.keytab /team1/dev/kerberos_keytab
+     echo "KEYTAB TEAM1 DEV FILE CONTENTS " >  kerberos-team1-dev.keytab
+     dcos security secrets create --file kerberos-team1-dev.keytab /team1/dev/dev_kerberos_keytab
 
-     $ echo "KEYTAB TEAM1 TEST FILE CONTENTS " >  kerberos-team1-test.keytab
-     $ dcos security secrets create --file kerberos-team1-test.keytab /team1/test/kerberos_keytab
+     echo "KEYTAB TEAM1 TEST FILE CONTENTS " >  kerberos-team1-test.keytab
+     dcos security secrets create --file kerberos-team1-test.keytab /team1/test/test_kerberos_keytab
+
+     echo "KEYTAB TEAM2 DEV FILE CONTENTS " >  kerberos-team2-dev.keytab
+     dcos security secrets create --file kerberos-team2-dev.keytab /team2/dev/dev_kerberos_keytab
+
+     echo "KEYTAB TEAM2 TEST FILE CONTENTS " >  kerberos-team2-test.keytab
+     dcos security secrets create --file kerberos-team2-test.keytab /team2/test/test_kerberos_keytab
+
 
 <b>Related Content</b>:<br>
 
