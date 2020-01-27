@@ -116,28 +116,35 @@ Step 4. Create some non-admin users and groups with limited access permissions.
 
      Group: team1
 
-     $ dcos security org groups create team1
+     dcos security org groups create team1
 
-     $ dcos security org users create --password changeme ringo
+     dcos security org users create --password changeme ringo
 
-     $ dcos security org groups add_user team1 ringo
+     dcos security org groups add_user team1 ringo
 
-     $ dcos security org users create --password changeme john
+     dcos security org users create --password changeme john
 
-     $ dcos security org groups add_user team1 john
+     dcos security org groups add_user team1 john
 
      Add some privileges to the group
 
-     $ dcos security org groups grant team1 dcos:adminrouter:service:marathon full
-     $ dcos security org groups grant team1 dcos:adminrouter:ops:slave full
-     $ dcos security org groups grant team1 dcos:adminrouter:ops:mesos full
-     $ dcos security org groups grant team1 dcos:adminrouter:package full
-     $ dcos security org groups grant team1 dcos:service:marathon:marathon:services:/team1/dev full
-     $ dcos security org groups grant team1 dcos:service:marathon:marathon:services:/team1/test full
-     $ dcos security org groups grant team1 dcos:secrets:default:/team1/dev full
-     $ dcos security org groups grant team1 dcos:secrets:default:/team1/test full
+          dcos security org groups grant team1 dcos:adminrouter:ops:mesos full
 
-     $ dcos security org groups grant team1 dcos:adminrouter:service:service/team1/dev/data-science-engine/lab full
+          dcos security org groups grant team1 dcos:adminrouter:ops:slave full
+
+          dcos security org groups grant team1 dcos:adminrouter:package full
+
+          dcos security org groups grant team1 dcos:adminrouter:service:team1/ full
+
+          dcos security org groups grant team1 dcos:adminrouter:service:marathon full
+
+          dcos security org groups grant team1 dcos:secrets:default:/team1 full
+
+          dcos security org groups grant team1 dcos:secrets:list:default:/team1 full
+
+          dcos security org groups grant team1 dcos:service:marathon:marathon:services:/team1 full
+
+          dcos security org groups grant team1 dcos:adminrouter:service:service/team1/dev/data-science-engine/lab full
 
      Group: team2
 
