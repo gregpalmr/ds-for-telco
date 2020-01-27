@@ -48,7 +48,7 @@ Modifications include updating the Customer_Churn_Analysis.ipynb Jupyter noteboo
 4. Show how Mesosphere Data Science Engine (DSE) can easily be setup for multiple teams and team members. Show and discuss the following:
 
      - HDFS (data lake) integration
-     -     Use default endpoint: http://api.hdfs.marathon.l4lb.thisdcos.directory/v1/endpoints
+     ```Use default endpoint: http://api.hdfs.marathon.l4lb.thisdcos.directory/v1/endpoints```
      - GPU support
      - Inbound Load Balancer support and Admin Router support
      - TLS support
