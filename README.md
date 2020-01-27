@@ -69,9 +69,27 @@ Modifications include updating the Customer_Churn_Analysis.ipynb Jupyter noteboo
      - Dynamic downloading of git repos
           ``` Add "git clone https://github.com/gregpalmr/ds-for-telco && " to begining of CMD```
 
-5. Show the ds-for-telco Jupyter lab/Spark notebook
+5. Show the sample ds-for-telco Jupyter lab/Spark notebook
 
-     Follow the script for the original ds-for-telco Jupyter lab & spark demo
+     Follow the script for the original ds-for-telco Jupyter lab & spark demo. It will illustrate the following capabilities:
+
+     - Using Pyspark (mention that SparkR, Java, Scala and others are also available)
+     
+     - Accessing the Hadoop data lake (for demo purposes, access the HDFS service on this DC/OS cluster)
+
+     - Using a SparkContext for a fully distributed Spark job (not just on the user's laptop)
+
+     - Using a SQL context that allows for a schema to be associated with the schemaless data set
+
+     - Exploring the test data set and expoloring candidate ML features
+
+     - Performing feature extraction and training the model
+
+     - Training data vs. testing data
+
+     - Model evaluation (Is my predictor better than random guessing?)
+
+     - Experiment with various classifiers to help improve the predictive levels of the model (Linear SVM, Decision Tree, Random Forest, Gradient-Boosted Trees, etc.)
 
 6. Summarize what was demo'd and link it to the previously presented value propositions:
 
