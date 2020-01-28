@@ -230,6 +230,35 @@ Step 5. Create a demo file-based secrets holding a fake kerberos keytab file con
      echo "KEYTAB TEAM2 TEST FILE CONTENTS " >  kerberos-team2-test.keytab
      dcos security secrets create --file kerberos-team2-test.keytab /team2/test/test_kerberos_keytab
 
+Step 6. Launch a load balancer for optionally providing access to data science notebooks directly
+
+     dcos package install --options=resources/load-balancer-options.json marathon-lb --yes
+
+     Also, modify your cloud vendor's security group (firewall) rules to allow access to the HAPROXY console (port 9090) and to load balancer service ports (ports 10100-10200).
+
+Step 7. Launch a Hadoop HDFS service to serve as the data lake
+
+     dcos package install --options=resources/hdfs-options.json hdfs --yes
+
+     dcos marathon app add resources/hdfs-create-dirs.json && sleep 30 && dcos marathon app remove hdfs-create-dirs
+
+Step 8. Run Spark and other services for demo purposes
+
+    dcos package install spark --yes
+
+    dcos package install --options=resources/spark-history-options.json spark-history --yes
+
+Step 8. Launch a DC/OS Data Science Engine for each team member (and two for John)
+
+     dcos package install --options=resources/dse-options-ringo-team1-dev.json data-science-engine --yes
+
+     dcos package install --options=resources/dse-options-john-team1-dev.json data-science-engine --yes
+
+     dcos package install --options=resources/dse-options-john-team2-dev.json data-science-engine --yes
+
+     dcos package install --options=resources/dse-options-paul-team2-dev.json data-science-engine --yes
+
+     dcos package install --options=resources/dse-options-george-team2-dev.json data-science-engine --yes
 
 <b>Related Content</b>:<br>
 
