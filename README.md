@@ -248,6 +248,12 @@ Step 8. Run Spark and other services for demo purposes
 
     dcos package install --options=resources/spark-history-options.json spark-history --yes
 
+    dcos package install nifi --yes
+
+    dcos package install flink --yes
+
+    dcos package install kafka --yes
+
 Step 8. Launch a DC/OS Data Science Engine for each team member (and two for John)
 
      dcos package install --options=resources/dse-options-ringo-team1-dev.json data-science-engine --yes
