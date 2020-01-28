@@ -1,0 +1,25 @@
+{
+  "service": {
+    "name": "spark-history",
+    "cpus": 1,
+    "mem": 1024,
+    "log-dir": "hdfs://hdfs/history",
+    "user": "nobody",
+    "docker-image": "mesosphere/spark:2.9.0-2.4.3-scala-2.11-hadoop-2.9",
+    "cleaner": {
+      "enabled": false,
+      "interval": "1d",
+      "max-age": "7d"
+    },
+    "hdfs-config-url": "http://api.hdfs.marathon.l4lb.thisdcos.directory/v1/endpoints"
+  },
+  "security": {
+    "kerberos": {
+      "enabled": false,
+      "kdc": {},
+      "krb5conf": "",
+      "principal": "",
+      "keytab": ""
+    }
+  }
+}
